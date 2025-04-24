@@ -10,9 +10,6 @@ const register = async (req, res) => {
     throw new CustomError.BadRequestError('Email alredy exists')
   }
 
-  //first registered user is an admin
-
-  //countDocument()返回一个整数，代表与该集合或视图的查询匹配的文档数量,返回等於0的話，第一個創建的帳戶會是admin,不是的話會是user
   const isFirstAccount = (await User.countDocuments({})) === 0
   const role = isFirstAccount ? 'admin' : 'user'
 
